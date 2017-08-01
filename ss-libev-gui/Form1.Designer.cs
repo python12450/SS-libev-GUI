@@ -289,6 +289,7 @@
             this.Text = "影梭libev-GUI（obfs）";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.VisibleChanged += new System.EventHandler(this.Form1_VisibleChanged);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

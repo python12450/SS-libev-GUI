@@ -16,22 +16,18 @@ namespace ShadowsockslibevGUI
         static void Main()
         {
             bool createNew;
-            using (Mutex mutex = new Mutex(true, Application.ProductName, out createNew))
-            {
-                if (createNew)
-                {
+            using(var mutex = new Mutex(true, Application.ProductName, out createNew)) {
+                if(createNew) {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new Form1());
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("应用程序已经在运行中...");
-                    System.Threading.Thread.Sleep(1000);
-                    System.Environment.Exit(1);
+                    Thread.Sleep(1000);
+                    Environment.Exit(1);
                 }
             }
-            
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,29 +7,33 @@ using System.Threading.Tasks;
 
 namespace ShadowsockslibevGUI
 {
-    class ServiceCTL
+    static class ServiceCTL
     {
-        System.Diagnostics.Process p = new System.Diagnostics.Process();
-        System.Diagnostics.Process kill = new System.Diagnostics.Process();
-        public void StartService()
+        public static void StartService()
         {
-            p.StartInfo.FileName = "ss-local.exe";
-            p.StartInfo.Arguments = "-c config.json -u";
-            p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            p.Start();
+            using(var p = new Process()) {
+                p.StartInfo.FileName = "ss-local.exe";
+                p.StartInfo.Arguments = "-c config.json -u";
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.Start();
+            }
         }
-        public void StopService()
+
+        public static void StopService()
         {
-            kill.StartInfo.FileName = "cmd.exe";
-            kill.StartInfo.UseShellExecute = false;
-            kill.StartInfo.RedirectStandardInput = true;
-            kill.StartInfo.RedirectStandardOutput = true;
-            kill.StartInfo.RedirectStandardError = true;
-            kill.StartInfo.CreateNoWindow = true;
-            kill.Start();
-            kill.StandardInput.WriteLine("taskkill /F /IM obfs-local.exe" + "&exit");
+            using(var kill = new Process()) {
+                kill.StartInfo.FileName = "taskkill.exe";
+                kill.StartInfo.UseShellExecute = false;
+                kill.StartInfo.RedirectStandardInput = true;
+                kill.StartInfo.RedirectStandardOutput = true;
+                kill.StartInfo.RedirectStandardError = true;
+                kill.StartInfo.CreateNoWindow = true;
+                kill.StartInfo.Arguments = "/F /IM obfs-local.exe";
+                kill.Start();
+            }
         }
-        public void ReloadService()
+
+        public static void ReloadService()
         {
             StopService();
             System.Threading.Thread.Sleep(200);
