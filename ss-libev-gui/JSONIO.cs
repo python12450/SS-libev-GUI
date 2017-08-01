@@ -54,13 +54,9 @@ namespace ShadowsockslibevGUI
         }
     }
 
-    static class DStoCombobox
-    {
-        public static IReadOnlyList<string> method = new string[6] { "aes-128-cfb", "rc4-md5", "chacha20", "aes-128-ctr", "aes-128-gcm", "chacha20-ietf-poly1305" };
-    }
-
     static class JSONIO
     {
+        public static IReadOnlyList<string> method = new string[6] { "aes-128-cfb", "rc4-md5", "chacha20", "aes-128-ctr", "aes-128-gcm", "chacha20-ietf-poly1305" };
         private static ThreadLocal<Regex> rx0 = new ThreadLocal<Regex>(() => new Regex("obfs=http;.*", RegexOptions.Compiled));
         private static ThreadLocal<Regex> rx1 = new ThreadLocal<Regex>(() => new Regex("obfs=tls;.*", RegexOptions.Compiled));
 
@@ -92,8 +88,8 @@ namespace ShadowsockslibevGUI
             if(s.method == null) {
                 return 0;
             } else {
-                for(var i = 0; i < DStoCombobox.method.Count; i++) {
-                    if(s.method == DStoCombobox.method[i]) {
+                for(var i = 0; i < method.Count; i++) {
+                    if(s.method == method[i]) {
                         return i;
                     }
                 }

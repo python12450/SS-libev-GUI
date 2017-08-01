@@ -22,8 +22,8 @@ namespace ShadowsockslibevGUI
             JSONIO.checkConfigExit();
             var server = JSONIO.LoadFromFile() ?? new ServerInfo();
             StopClient.Enabled = false;
-            for(int i = 0; i < DStoCombobox.method.Count; i++) {
-                methodBox.Items.Insert(i, DStoCombobox.method[i]);
+            for(int i = 0; i < JSONIO.method.Count; i++) {
+                methodBox.Items.Insert(i, JSONIO.method[i]);
             }
             methodBox.SelectedIndex = JSONIO.AEAD_MethodNum(server);
             methodBox.DropDownStyle = ComboBoxStyle.DropDownList;
